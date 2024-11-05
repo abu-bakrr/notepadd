@@ -1,0 +1,518 @@
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	user-select: none;
+	font-family: bungee;
+}
+@font-face {
+	font-family: bungee;
+	src: url(../fonts/JetBrains_Mono/JetBrainsMono-VariableFont_wght.ttf);
+}
+*::placeholder {
+	font-family: bungee;
+}
+:root {
+	--i: calc(1vh + 1vw);
+	--background: #f0f8ff;
+	--backgroundColor: #87cefa;
+	--InputBackgroundColor: #87cefa;
+	--listColor: #ffc0cb;
+	--ScrollBarColor: #add8e6;
+	--pathColor: #4682b4;
+	--textColor: whitesmoke;
+	--placeholderColor: #4682b4;
+}
+body {
+	background: var(--background);
+	transition: 0.2s ease;
+}
+/* start_section */
+.none {
+	display: none !important;
+}
+.password-check {
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
+	transition: 0.2s ease;
+}
+.password-check:hover {
+	transform: translate(-50%, -50%) scale(1.1);
+}
+.heading {
+	font-family: 'Courier New', Courier, monospace;
+	color: var(--pathColor);
+	font-size: calc(var(--i) * 4);
+}
+.add-note {
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	transform: translate(5%, -50%);
+	width: calc(var(--i) * 8);
+	height: calc(var(--i) * 8);
+	border-radius: 20%;
+	background-color: var(--backgroundColor);
+	transition: 0.2s ease;
+}
+.add-note:hover {
+	transform: translate(5%, -50%) scale(1.1);
+	cursor: pointer;
+}
+.add-note-inner {
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
+	font-size: calc(var(--i) * 10);
+	color: var(--pathColor);
+	font-family: 'Courier New', Courier, monospace;
+}
+path {
+	fill: var(--pathColor);
+}
+rect {
+	fill: var(--pathColor);
+}
+.upload {
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	transform: translate(-105%, -50%);
+	width: calc(var(--i) * 8);
+	height: calc(var(--i) * 8);
+	border-radius: 20%;
+	background-color: var(--backgroundColor);
+	transition: 0.2s ease;
+	border: none;
+}
+.upload:hover {
+	transform: translate(-105%, -50%) scale(1.1);
+	cursor: pointer;
+}
+.load_img {
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
+	width: calc(var(--i) * 7);
+	height: calc(var(--i) * 7);
+}
+/* password */
+.input {
+	text-decoration: none;
+	outline: none;
+	border: none;
+	width: calc(var(--i) * 15);
+	height: calc(var(--i) * 2);
+	padding: 15px;
+	border-radius: 100000000px;
+	font-size: calc(var(--i) * 1);
+	font-family: 'Courier New', Courier, monospace;
+	color: var(--textColor);
+	background-color: var(--InputBackgroundColor);
+	border: solid 3px var(--pathColor);
+}
+.input::placeholder {
+	color: var(--placeholderColor);
+	font-family: 'Courier New', Courier, monospace;
+}
+.input::selection {
+	background: #2f2f33;
+}
+.input-name {
+	position: absolute;
+	left: 50%;
+	top: 30%;
+	transform: translate(-50%, -50%);
+}
+.p {
+	transform: translateX(-50%);
+	font-size: calc(var(--i) * 1);
+	color: var(--textColor);
+
+	display: none;
+}
+.p-name {
+	position: relative;
+	left: 50%;
+	transform: translateX(-50%);
+}
+.i-password {
+	position: absolute;
+	left: 50%;
+	top: 40%;
+	transform: translate(-50%, -50%);
+}
+.i-password-repair {
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
+}
+.submit {
+	position: absolute;
+	left: 50%;
+	width: calc(var(--i) * 7);
+	top: 60%;
+	transform: translate(-50%, -50%);
+	border: none;
+	text-decoration: none;
+	padding: 7px;
+	border-radius: 1000000px;
+	font-size: calc(var(--i) * 1);
+	color: var(--pathColor);
+
+	background-color: var(--InputBackgroundColor);
+	border: solid 3px var(--pathColor);
+	transition: 0.2s ease;
+	outline: none;
+}
+.submit:hover {
+	transform: translate(-50%, -50%) scale(1.1);
+}
+.submit::placeholder {
+	font-family: 'Courier New', Courier, monospace;
+}
+.none {
+	display: none !important;
+}
+.border {
+	position: absolute;
+	width: 50vw;
+	height: 60vh;
+	border: solid 5px var(--pathColor);
+	left: 50%;
+	top: 45%;
+	transform: translate(-50%, -50%);
+	border-radius: 30px;
+	min-width: calc(var(--i) * 17);
+}
+.hidden {
+	display: none !important;
+}
+.list {
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
+	width: 80vw;
+	height: 80vh;
+}
+.note-textarea {
+	position: absolute;
+	border-radius: 10px;
+	width: 80vw;
+	height: 80vh;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
+	resize: none;
+	background-color: var(--backgroundColor);
+	color: white;
+	padding: 30px;
+	outline: none;
+	font-family: 'Courier New', Courier, monospace;
+	font-size: calc(var(--i) * 1);
+	line-height: calc(var(--i) * 1.5);
+	border: solid 10px var(--backgroundColor);
+	transition: 0.2s ease;
+}
+.note-textarea::selection {
+	background: var(--background);
+}
+.note-textarea::-webkit-scrollbar-track {
+	background-color: var(--backgroundColor);
+	border-radius: 10px;
+}
+.note-textarea::-webkit-scrollbar {
+	width: calc(var(--i) * 0.8);
+}
+.note-textarea::-webkit-scrollbar-thumb {
+	border-radius: 8px;
+	background-color: var(--pathColor);
+	border: solid 3px var(--backgroundColor);
+}
+.submit-list {
+	position: absolute;
+	left: 50%;
+	top: 5%;
+	transform: translate(-50%, -50%);
+	border: none;
+	text-decoration: none;
+	padding: 7px;
+	border-radius: 1000000px;
+	font-size: calc(var(--i) * 1);
+	color: var(--pathColor);
+	background-color: var(--InputBackgroundColor);
+	border: solid 2px var(--pathColor);
+	transition: 0.2s ease;
+	outline: none;
+}
+.submit-list:hover {
+	transform: translate(-50%, -50%) scale(1.1);
+}
+
+.create-password {
+	position: absolute;
+	width: calc(var(--i) * 15);
+	height: calc(var(--i) * 2);
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
+}
+.back-button {
+	position: absolute;
+	width: calc(var(--i) * 10);
+	top: -5%;
+	left: 0vw;
+	transform: translate(0%, -50%);
+	border: none;
+	text-decoration: none;
+	padding: 7px;
+	border-radius: 1000000px;
+	font-size: calc(var(--i) * 1);
+	color: var(--textColor);
+
+	background-color: var(--InputBackgroundColor);
+	transition: 0.2s ease;
+	outline: none;
+}
+.back-button:hover {
+	transform: translate(0%, -50%) scale(1.1);
+}
+.back-to-start {
+	position: absolute;
+	top: 2%;
+	left: 2%;
+	transition: 0.2s ease;
+}
+.back-to-start:hover {
+	transform: scale(1.1);
+}
+
+.back_btn {
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
+	width: calc(var(--i) * 1.5);
+	height: calc(var(--i) * 1.5);
+}
+.backFromCreate {
+	margin: calc(var(--i) * 1);
+	position: absolute;
+	text-decoration: none;
+	outline: none;
+	border: none;
+	width: calc(var(--i) * 3);
+	height: calc(var(--i) * 3);
+	padding: 10px;
+	border-radius: 100000000px;
+	font-size: calc(var(--i) * 1);
+	font-family: 'Courier New', Courier, monospace;
+	color: var(--textColor);
+
+	background-color: var(--backgroundColor);
+	border: solid 3px var(--pathColor);
+	transition: 0.2s ease;
+}
+.backFromCreate:hover {
+	transform: scale(1.1);
+}
+
+.withPassword {
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	transform: translate(5%, -50%);
+	width: calc(var(--i) * 8);
+	height: calc(var(--i) * 8);
+	border-radius: 20%;
+	background-color: var(--backgroundColor);
+	transition: 0.2s ease;
+}
+
+.withPassword:hover {
+	transform: translate(5%, -50%) scale(1.1);
+}
+.notPassword {
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	transform: translate(-105%, -50%);
+	width: calc(var(--i) * 8);
+	height: calc(var(--i) * 8);
+	border-radius: 20%;
+	background-color: var(--backgroundColor);
+	transition: 0.2s ease;
+	border: none;
+}
+.notPassword:hover {
+	transform: translate(-105%, -50%) scale(1.1);
+}
+
+.unblock_btn {
+	position: absolute;
+	left: 50%;
+	bottom: 15%;
+	transform: translate(-50%, 0%);
+	width: calc(var(--i) * 5);
+	height: calc(var(--i) * 5);
+}
+.block_btn {
+	position: absolute;
+	left: 50%;
+	bottom: 15%;
+	transform: translate(-50%, 0%);
+	width: calc(var(--i) * 5.8);
+	height: calc(var(--i) * 5.8);
+}
+
+.numInfo {
+	position: relative;
+	color: var(--pathColor);
+	font-size: calc(var(--i) * 1);
+	top: 90vh;
+	left: 10vw;
+	float: left;
+	font-family: 'Courier New', Courier, monospace;
+	margin: 10px;
+}
+
+.none {
+	display: none !important;
+}
+
+.themeBlock {
+	position: absolute;
+	width: calc(var(--i) * 2.5);
+	aspect-ratio: 1/1;
+	left: 100%;
+	transform: translate(-130%, 20%);
+}
+.shieThemeBlock svg path {
+	fill: var(--textColor);
+}
+.nigthThemeBlock path {
+	fill: var(--pathColor);
+}
+
+:root {
+	--darkBackground: #242a38;
+	--accentColor: #31384a;
+	--mainColor: #0a2a66;
+	--btnColor: #2f3a57;
+	--textColor: rgb(138, 151, 185);
+}
+.dark {
+	background-color: var(--darkBackground);
+}
+.dark .start-section h1 {
+	color: var(--textColor);
+}
+.dark .start-section .upload {
+	background-color: var(--btnColor);
+}
+.dark .start-section .upload svg path,
+.dark .start-section .upload svg rect {
+	fill: var(--textColor);
+}
+
+.dark .start-section h1 {
+	color: var(--textColor);
+}
+.dark .start-section .upload {
+	background-color: var(--btnColor);
+}
+.dark .start-section .add-note .add-note-inner {
+	color: var(--textColor);
+}
+.dark .start-section .add-note {
+	background-color: var(--btnColor);
+}
+
+.dark .backFromCreate {
+	background-color: var(--btnColor);
+	border: solid 1px var(--textColor);
+}
+.dark .backFromCreate svg path {
+	fill: var(--textColor);
+}
+.dark .withPassword {
+	background-color: var(--btnColor);
+}
+.dark .withPassword svg path {
+	fill: var(--textColor);
+}
+.dark .notPassword {
+	background-color: var(--btnColor);
+}
+.dark .notPassword svg path {
+	fill: var(--textColor);
+}
+.dark .note-textarea {
+	background-color: var(--accentColor);
+	border: solid 10px var(--accentColor);
+	color: var(--textColor);
+}
+
+.dark .numInfo {
+	color: var(--textColor);
+}
+.dark .submit-list {
+	background-color: var(--btnColor);
+	border: 2px solid var(--textColor);
+	color: var(--textColor);
+}
+.dark::selection {
+	background: var(--textColor);
+}
+.dark .border {
+	border: solid 5px var(--textColor);
+}
+.dark input {
+	background-color: var(--accentColor);
+	color: var(--textColor);
+	border: solid 3px var(--textColor);
+}
+.dark input::placeholder {
+	color: var(--textColor);
+}
+
+input {
+	transition: 0.2s ease;
+}
+
+.ribbon {
+	position: absolute;
+	right: 0;
+	top: 0;
+	transform: translate(45%, 25%) rotate(25deg);
+	width: calc(var(--i) * 2);
+	height: calc(var(--i) * 2);
+	transition: 0.2s ease;
+}
+
+.head {
+	position: absolute;
+	left: 50%;
+	top: 8%;
+	transform: translate(-50%, -50%);
+	display: inline;
+	display: block;
+}
+
+.worknt {
+	opacity: 0.5;
+}
+
+.error {
+	border: solid rgb(171, 58, 58) 3px !important;
+	color: rgb(171, 58, 58) !important;
+}
+.error::placeholder {
+	color: rgb(171, 58, 58) !important;
+}
