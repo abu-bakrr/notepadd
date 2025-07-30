@@ -58,9 +58,10 @@ function saveNote(el) {
 		let nameOfFile = noteNameInput.value
 		let passwordValue = String(notePasswordInput.value)
 		const text = noteTextarea.value
-		let mixed = '~' + passwordValue.length + passwordValue + text
-		let valueOfFile = runEncryptionExample(mixed, key)
+
 		if (passwordValue !== '') {
+			let mixed = '~' + passwordValue.length + passwordValue + text
+			let valueOfFile = runEncryptionExample(mixed, key)
 			if (nameOfFile !== '') {
 				send(valueOfFile, nameOfFile)
 			} else {
