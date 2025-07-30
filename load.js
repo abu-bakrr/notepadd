@@ -5,7 +5,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 	if (encodedText) {
-		alert('ljikj')
 		// Корректное декодирование Base64 с поддержкой кириллицы
 		const decodedText = decodeURIComponent(escape(atob(encodedText)))
 		console.log('Декодированное содержимое файла: ', decodedText)
