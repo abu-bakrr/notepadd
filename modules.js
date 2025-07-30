@@ -1,54 +1,186 @@
-async function encrypt(text, key) {
-	const iv = window.crypto.getRandomValues(new Uint8Array(12)) // IV длиной 12 байт
-	const encoder = new TextEncoder()
-	const encrypted = await window.crypto.subtle.encrypt(
-		{
-			name: 'AES-GCM',
-			iv: iv,
-		},
-		key,
-		encoder.encode(text) // Кодируем текст в байты
-	)
+function mix(str) {
+	let encryptedText = ''
 
-	// Кодируем IV и зашифрованный текст в Base64
-	return {
-		iv: btoa(String.fromCharCode(...iv)),
-		data: btoa(String.fromCharCode(...new Uint8Array(encrypted))),
+	for (let char of str) {
+		if (letterToSymbol[char]) {
+			encryptedText += letterToSymbol[char]
+		} else if (specialToLetter[char]) {
+			encryptedText += specialToLetter[char]
+		} else {
+			encryptedText += char // если символ не в словаре, оставляем его как есть
+		}
 	}
+	return encryptedText
 }
 
-async function decrypt(encryptedData, key) {
-	const iv = new Uint8Array(
-		atob(encryptedData.iv)
-			.split('')
-			.map(c => c.charCodeAt(0))
-	)
-	const data = new Uint8Array(
-		atob(encryptedData.data)
-			.split('')
-			.map(c => c.charCodeAt(0))
-	)
-	const decrypted = await window.crypto.subtle.decrypt(
-		{
-			name: 'AES-GCM',
-			iv: iv,
-		},
-		key,
-		data
-	)
+function unmix(str) {
+	let decryptedText = ''
 
-	const decoder = new TextDecoder()
-	return decoder.decode(decrypted) // Декодируем байты в текст
-}
-
-async function runEncryptionExample(text, key) {
-	const encryptedData = await encrypt(text, key)
-	return encryptedData
-}
-
-async function runDecryptionExample(text, key) {
-	const decryptedText = await decrypt(text, key)
+	for (let char of str) {
+		if (symbolToLetter[char]) {
+			decryptedText += symbolToLetter[char]
+		} else if (letterToSpecial[char]) {
+			decryptedText += letterToSpecial[char]
+		} else {
+			decryptedText += char // если символ не в словаре, оставляем его как есть
+		}
+	}
 	return decryptedText
+}
+
+const letterToSymbol = {
+	A: '@',
+	B: '#',
+	C: '$',
+	D: '%',
+	E: '^',
+	F: '&',
+	G: '*',
+	H: '(',
+	I: ')',
+	J: '-',
+	K: '=',
+	L: '+',
+	M: '[',
+	N: ']',
+	O: '{',
+	P: '}',
+	Q: '\\',
+	R: '|',
+	S: ';',
+	T: ':',
+	U: '"',
+	V: '<',
+	W: '>',
+	X: ',',
+	Y: '.',
+	Z: '/',
+	a: '!',
+	b: '1',
+	c: '2',
+	d: '3',
+	e: '4',
+	f: '5',
+	g: '6',
+	h: '7',
+	i: '8',
+	j: '9',
+	k: '0',
+	l: 'q',
+	m: 'w',
+	n: 'e',
+	o: 'r',
+	p: 't',
+	q: 'y',
+	r: 'u',
+	s: 'i',
+	t: 'o',
+	u: 'p',
+	v: 'a',
+	w: 's',
+	x: 'd',
+	y: 'f',
+	z: 'g',
+	А: 'ш',
+	Б: 'щ',
+	В: 'з',
+	Г: 'х',
+	Д: 'ц',
+	Е: 'ч',
+	Ё: 'й',
+	Ж: 'к',
+	З: 'л',
+	И: 'м',
+	Й: 'н',
+	К: 'б',
+	Л: 'ю',
+	М: 'я',
+	Н: 'р',
+	О: 'д',
+	П: 'т',
+	Р: 'у',
+	С: 'и',
+	Т: 'о',
+	У: 'п',
+	Ф: 'а',
+	Х: 'с',
+	Ц: 'г',
+	Ч: 'в',
+	Ш: 'ь',
+	Щ: 'ы',
+	Ъ: 'э',
+	Ы: 'ж',
+	Ь: 'ф',
+	Э: 'ё',
+	Ю: 'х',
+	Я: 'ц',
+	а: 'Ш',
+	б: 'Щ',
+	в: 'З',
+	г: 'Х',
+	д: 'Ц',
+	е: 'Ч',
+	ё: 'Й',
+	ж: 'К',
+	з: 'Л',
+	и: 'М',
+	й: 'Н',
+	к: 'Б',
+	л: 'Ю',
+	м: 'Я',
+	н: 'Р',
+	о: 'Д',
+	п: 'Т',
+	р: 'У',
+	с: 'И',
+	т: 'О',
+	у: 'П',
+	ф: 'А',
+	х: 'С',
+	ц: 'Г',
+	ч: 'В',
+	ш: 'Ь',
+	щ: 'Ы',
+	ъ: 'Э',
+	ы: 'Ж',
+	ь: 'Ф',
+	э: 'Ё',
+	ю: 'Х',
+	я: 'Ц',
+}
+
+const specialToLetter = {
+	' ': 'X',
+	'.': 'Y',
+	',': 'Z',
+}
+
+const symbolToLetter = {}
+for (const [letter, symbol] of Object.entries(letterToSymbol)) {
+	symbolToLetter[symbol] = letter
+}
+
+const letterToSpecial = {}
+for (const [special, letter] of Object.entries(specialToLetter)) {
+	letterToSpecial[letter] = special
+}
+
+function combination(text) {
+	let chars = text.split('')
+	for (let i = 0; i < chars.length - 1; i += 2) {
+		swap(chars, i, i + 1)
+	}
+	return chars.join('')
+}
+
+function unconbination(text) {
+	return combination(text)
+}
+
+function swap(arr, i, j) {
+	let temp = arr[i]
+	arr[i] = arr[j]
+	arr[j] = temp
 }
 
 const urlParams = new URLSearchParams(window.location.search)
