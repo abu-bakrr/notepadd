@@ -12,6 +12,15 @@
 *::placeholder {
 	font-family: bungee;
 }
+.ribbon {
+	position: absolute;
+	right: 0;
+	top: 0;
+	transform: translate(45%, 25%) rotate(25deg);
+	width: calc(var(--i) * 2);
+	height: calc(var(--i) * 2);
+	transition: 0.2s ease;
+}
 :root {
 	--i: calc(1vh + 1vw);
 	--background: #f0f8ff;
