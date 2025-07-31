@@ -77,7 +77,7 @@ document.getElementById('fileUpload').addEventListener('change', function (el) {
 	fileInputElement.value = ''
 })
 function read(textt) {
-	let res = uncombinatoin(textt)
+	let res = unconbination(textt)
 	if (res[0] == '~') {
 		chekking(res)
 	} else {
