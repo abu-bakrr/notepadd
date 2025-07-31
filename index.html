@@ -9,7 +9,18 @@
 		<script defer src="index.js"></script>
 		<script defer src="let.js"></script>
 		<script defer src="load.js"></script>
-		<title>Notepad</title>
+		<title>FLove</title>
+		<style>
+			.flove::first-letter {
+				color: #4682b4;
+			}
+			.flove {
+				color: red;
+			}
+			.heading {
+				transition: 0.2s color;
+			}
+		</style>
 	</head>
 	<body id="main">
 		<main>
@@ -157,7 +168,8 @@
 
 			<div class="start-section">
 				<div class="head" id="heading">
-					<h1 onclick="changeTitle()" class="heading">notepad</h1>
+					<h1 onclick="changeTitle()" class="heading">flove</h1>
+					<img id="ribbon" class="ribbon" src="ribbon.png" alt="бантик" />
 				</div>
 				<button onclick="uploadFile()" id="uploadBtn" class="upload">
 					<input accept=".txt" id="fileUpload" type="file" hidden />
