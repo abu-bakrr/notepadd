@@ -1,13 +1,12 @@
 function mix(str) {
 	let encryptedText = ''
-
 	for (let char of str) {
 		if (letterToSymbol[char]) {
 			encryptedText += letterToSymbol[char]
 		} else if (specialToLetter[char]) {
 			encryptedText += specialToLetter[char]
 		} else {
-			encryptedText += char // если символ не в словаре, оставляем его как есть
+			encryptedText += char
 		}
 	}
 	return encryptedText
@@ -15,144 +14,38 @@ function mix(str) {
 
 function unmix(str) {
 	let decryptedText = ''
-
-	for (let char of str) {
-		if (symbolToLetter[char]) {
-			decryptedText += symbolToLetter[char]
-		} else if (letterToSpecial[char]) {
-			decryptedText += letterToSpecial[char]
-		} else {
-			decryptedText += char // если символ не в словаре, оставляем его как есть
+	let i = 0
+	while (i < str.length) {
+		if (str[i] === '#') {
+			const code = str.slice(i, i + 3)
+			if (symbolToLetter[code]) {
+				decryptedText += symbolToLetter[code]
+				i += 3
+				continue
+			}
 		}
+		if (letterToSpecial[str[i]]) {
+			decryptedText += letterToSpecial[str[i]]
+		} else {
+			decryptedText += str[i]
+		}
+		i++
 	}
 	return decryptedText
 }
 
-const letterToSymbol = {
-	A: '@',
-	B: '#',
-	C: '$',
-	D: '%',
-	E: '^',
-	F: '&',
-	G: '*',
-	H: '(',
-	I: ')',
-	J: '-',
-	K: '=',
-	L: '+',
-	M: '[',
-	N: ']',
-	O: '{',
-	P: '}',
-	Q: '\\',
-	R: '|',
-	S: ';',
-	T: ':',
-	U: '"',
-	V: '<',
-	W: '>',
-	X: ',',
-	Y: '.',
-	Z: '/',
-	a: '!',
-	b: '1',
-	c: '2',
-	d: '3',
-	e: '4',
-	f: '5',
-	g: '6',
-	h: '7',
-	i: '8',
-	j: '9',
-	k: '0',
-	l: 'q',
-	m: 'w',
-	n: 'e',
-	o: 'r',
-	p: 't',
-	q: 'y',
-	r: 'u',
-	s: 'i',
-	t: 'o',
-	u: 'p',
-	v: 'a',
-	w: 's',
-	x: 'd',
-	y: 'f',
-	z: 'g',
-	А: 'ш',
-	Б: 'щ',
-	В: 'з',
-	Г: 'х',
-	Д: 'ц',
-	Е: 'ч',
-	Ё: 'й',
-	Ж: 'к',
-	З: 'л',
-	И: 'м',
-	Й: 'н',
-	К: 'б',
-	Л: 'ю',
-	М: 'я',
-	Н: 'р',
-	О: 'д',
-	П: 'т',
-	Р: 'у',
-	С: 'и',
-	Т: 'о',
-	У: 'п',
-	Ф: 'а',
-	Х: 'с',
-	Ц: 'г',
-	Ч: 'в',
-	Ш: 'ь',
-	Щ: 'ы',
-	Ъ: 'э',
-	Ы: 'ж',
-	Ь: 'ф',
-	Э: 'ё',
-	Ю: 'х',
-	Я: 'ц',
-	а: 'Ш',
-	б: 'Щ',
-	в: 'З',
-	г: 'Х',
-	д: 'Ц',
-	е: 'Ч',
-	ё: 'Й',
-	ж: 'К',
-	з: 'Л',
-	и: 'М',
-	й: 'Н',
-	к: 'Б',
-	л: 'Ю',
-	м: 'Я',
-	н: 'Р',
-	о: 'Д',
-	п: 'Т',
-	р: 'У',
-	с: 'И',
-	т: 'О',
-	у: 'П',
-	ф: 'А',
-	х: 'С',
-	ц: 'Г',
-	ч: 'В',
-	ш: 'Ь',
-	щ: 'Ы',
-	ъ: 'Э',
-	ы: 'Ж',
-	ь: 'Ф',
-	э: 'Ё',
-	ю: 'Х',
-	я: 'Ц',
-}
 
-const specialToLetter = {
-	' ': 'X',
-	'.': 'Y',
-	',': 'Z',
+const letterToSymbol = {}
+const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyzАБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯабвгдеёжзийклмнопрстуфхцчшщъыьэюя'
+
+letters.split('').forEach((char, index) => {
+	// Уникальные значения вида #00, #01, ..., #99, #a0, ...
+	const encoded = '#' + index.toString(36).padStart(2, '0') // 36-ричная система, чтобы уместить до ~1296 символов
+	letterToSymbol[char] = encoded
+})
+const symbolToLetter = {}
+for (const [letter, symbol] of Object.entries(letterToSymbol)) {
+	symbolToLetter[symbol] = letter
 }
 
 const symbolToLetter = {}
