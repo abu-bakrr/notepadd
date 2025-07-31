@@ -112,7 +112,7 @@ function checkPassword(el) {
 		headingElement.classList.add('hidden')
 		noteForm.classList.add('hidden')
 		noteList.classList.remove('hidden')
-		noteTextarea.value = unmixx
+		noteTextarea.value = unmix(unmixx)
 	} else {
 		signInPasswordInput.classList.add('error')
 		signInButton.classList.add('error')
