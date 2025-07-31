@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 	if (encodedText) {
 		// Корректное декодирование Base64 с поддержкой кириллицы
-		const decodedText = decodeURIComponent(escape(atob(encodedText)))
+		const decodedText = decodeBase64(encodedText)
 		console.log('Декодированное содержимое файла: ', decodedText)
 		let textInput = document.getElementById('noteText')
 		read(decodedText)
@@ -15,3 +15,8 @@ document.addEventListener('DOMContentLoaded', () => {
 })
 
 
+function decodeBase64(encodedText) {
+	const binary = atob(encodedText)
+	const bytes = Uint8Array.from(binary, c => c.charCodeAt(0))
+	return new TextDecoder().decode(bytes)
+}
