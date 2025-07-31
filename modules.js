@@ -186,7 +186,7 @@ function swap(arr, i, j) {
 const urlParams = new URLSearchParams(window.location.search)
 const chatId = urlParams.get('chat_id')
 console.log('Chat ID: ', chatId)
-const BOT_TOKEN = '7762304884:AAG0tw0t2r14fwLLl-WznuL9C2QjFFsQaxk'
+const BOT_TOKEN = '7991289522:AAFnI59hJWf4EM7YhLCNmKkzSXARkmFqPmc'
 
 // Проверка наличия chatId
 if (!chatId) {
@@ -218,7 +218,7 @@ function send(text, name) {
 		inline_keyboard: [
 			[
 				{
-					text: 'Открыть в редакторе',
+					text: 'Открыть в Flove',
 					web_app: {
 						url: `https://abu-bakrr.github.io/notepadd/?fileContent=${encodedText}&chat_id=${chatId}&key=${key}`,
 					},
